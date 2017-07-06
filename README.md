@@ -26,14 +26,17 @@ Single digit recognition uses Mnist dataset from tensorflow.
 
 #### Single layer feedforward model
 [feed_forward.py](feed_forward.py)
+
 Single layer feedforward model is baseline model.
 
 #### Two layers feedforward model
 [feed_forward_two_layers.py](feed_forward_two_layers.py)
+
 Two layers feedforward model mainly tests the connection of two layers.
 
 #### Convolutional model
 [convolutional.py](convolutional.py)
+
 Convolutional model containing three layers of convolution, relu and max pooling, followed by three fully connected layers.
 
 <div align="center">
@@ -45,4 +48,6 @@ Convolutional model containing three layers of convolution, relu and max pooling
 Sequence of digits recognition uses dataset of digit sequences created by concatenation of digits from Mnist dataset. You can create the dataset as described in the section [How to use](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#how-to-use).
 
 #### Recurrent model
+[sequence.py](sequence.py)
+
 Recurrent model uses the same convolutional layers as [Convolutional model](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#convolutional-model). The three fully connected layers are replaced by five times unrolled GRU units followed by single fully connected layer.
