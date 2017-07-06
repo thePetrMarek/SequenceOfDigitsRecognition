@@ -5,7 +5,7 @@ Recognition of sequence of digits using tensorflow. All experiments are describe
 ### Single digit recognition
 Main file for single digit recognition is [main_single_digit.py](main_single_digit.py). Choose model in the main method and run it by
   
-  py -3 main_single_digit.py
+    py -3 main_single_digit.py
 
 ## Models
 ### Single digit recognition
