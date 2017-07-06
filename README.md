@@ -53,5 +53,5 @@ Sequence of digits recognition uses dataset of digit sequences created by concat
 Recurrent model uses the same convolutional layers as [Convolutional model](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#convolutional-model). The three fully connected layers are replaced by five times unrolled GRU units followed by single fully connected layer.
 
 <div align="center">
-  <img src="http://petr-marek.com/wp-content/uploads/2017/07/sequence-network.png" width="600px">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/sequence-network.png" width="700px">
 </div>
