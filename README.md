@@ -37,10 +37,9 @@ Two layers feedforward model mainly tests the connection of two layers.
 Convolutional model containing three layers of convolution, relu and max pooling, followed by three fully connected layers.
 
 <div align="center">
-  <img src="http://petr-marek.com/wp-content/uploads/2017/07/conv.png" width="100px">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/conv.png" width="200px">
 </div>
 
-![Convolutional model](http://petr-marek.com/wp-content/uploads/2017/07/conv.png)
 
 ### Sequence of digits recognition
 Sequence of digits recognition uses dataset of digit sequences created by concatenation of digits from Mnist dataset. You can create the dataset as described in the section [How to use](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#how-to-use).
