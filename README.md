@@ -36,6 +36,10 @@ Two layers feedforward model mainly tests the connection of two layers.
 [convolutional.py](convolutional.py)
 Convolutional model containing three layers of convolution, relu and max pooling, followed by three fully connected layers.
 
+<div align="center">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/conv.png" width="50px"><br><br>
+</div>
+
 ![Convolutional model](http://petr-marek.com/wp-content/uploads/2017/07/conv.png)
 
 ### Sequence of digits recognition
