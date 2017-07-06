@@ -1,6 +1,8 @@
 # Sequence of digits recognition
 Recognition of sequence of digits using tensorflow. All experiments, descriptions together with images of models and performances are described in [Sequence of digits recognition](http://petr-marek.com/blog/2017/07/05/sequence-digits-recognition/ "Sequence of digits recognition").
 
+![Sequence of digits recognition](http://petr-marek.com/wp-content/uploads/2017/07/Sn%C3%ADmek-obrazovky-68.png)
+
 ## How to use
 ### Single digit recognition
 Main file for single digit recognition is [main_single_digit.py](main_single_digit.py). Choose model in the main method and run it by:
