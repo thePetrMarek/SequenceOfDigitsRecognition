@@ -1,9 +1,9 @@
 import tensorflow as tf
 import numpy as np
-import matplotlib.pyplot as plt
 
 from prepare_dataset import load_dataset
 from sequence import Sequence
+from visualize import Visualize
 
 
 def get_batch(dataset, inputs_placeholder, labels_placeholder, keep_prob_placeholder, keep_prob_val):
@@ -20,25 +20,20 @@ def get_batch(dataset, inputs_placeholder, labels_placeholder, keep_prob_placeho
     return {inputs_placeholder: inputs, labels_placeholder: labels, keep_prob_placeholder: keep_prob_val}
 
 
-def show_predictions(inference_operation, batch, session, inputs_placeholder):
-    logits = session.run(inference_operation, feed_dict=batch)
-    argmax = np.argmax(logits, axis=2)
-    plt.imshow(batch[inputs_placeholder][0], cmap='gray')
-    plt.title(argmax[0])
-    plt.show()
-
-
 def evaluate(dataset, session, operation, inputs_placeholder, labels_placeholder, keep_prob_placeholder, name,
-             summary_writer,
-             learning_step):
+             summary_writer, learning_step, visualize_predictions=False):
     steps_per_epoch = len(dataset['examples']) // 50
     number_of_examples = steps_per_epoch * 50
 
+    visualize = Visualize()
     correct_num = 0
     for step in range(steps_per_epoch):
         batch = get_batch(dataset, inputs_placeholder, labels_placeholder, keep_prob_placeholder, 1)
-        correct_num += session.run(operation, feed_dict=batch)
-
+        corrects_in_batch, predictions = session.run(operation, feed_dict=batch)
+        correct_num += corrects_in_batch
+        if visualize_predictions:
+            for i in range(len(batch[inputs_placeholder])):
+                visualize.visualize(batch[inputs_placeholder][i], predictions[i], name)
     precision = correct_num / number_of_examples
     summary = tf.Summary()
     summary.value.add(tag='Accuracy_' + name, simple_value=precision)
@@ -51,7 +46,7 @@ if __name__ == '__main__':
     # Load model
     train = load_dataset("train.p", False)
     validation = load_dataset("validation.p", False)
-    test = load_dataset("test.p", True)
+    test = load_dataset("test.p", False)
 
     with tf.Graph().as_default():
         # Wiring
@@ -84,13 +79,12 @@ if __name__ == '__main__':
                 print("Train accuracy")
                 evaluate(train, session, evaluation, inputs_placeholder, labels_placeholder, keep_prob_placeholder,
                          "train", writer,
-                         step, )
+                         step, True)
                 print("Validation accuracy")
                 evaluate(validation, session, evaluation, inputs_placeholder, labels_placeholder, keep_prob_placeholder,
                          "validation", writer,
                          step)
                 print("Test accuracy")
                 evaluate(test, session, evaluation, inputs_placeholder, labels_placeholder, keep_prob_placeholder,
-                         "test", writer,
-                         step)
+                         "test", writer, step)
                 print()

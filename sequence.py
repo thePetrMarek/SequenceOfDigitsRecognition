@@ -71,7 +71,7 @@ class Sequence:
             difference = tf.subtract(labels, logits, name="sub")
             nonzeros = tf.count_nonzero(difference, axis=1)
 
-            return self.tf_count(nonzeros, 0)
+            return self.tf_count(nonzeros, 0), labels
 
     def tf_count(self, t, val):
         elements_equal_to_value = tf.equal(t, val)
