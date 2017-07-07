@@ -33,7 +33,8 @@ def evaluate(dataset, session, operation, inputs_placeholder, labels_placeholder
         correct_num += corrects_in_batch
         if visualize_predictions:
             for i in range(len(batch[inputs_placeholder])):
-                visualize.visualize(batch[inputs_placeholder][i], predictions[i], name)
+                true_label = np.argmax(batch[labels_placeholder][i], axis=1)
+                visualize.visualize_with_correct(batch[inputs_placeholder][i], predictions[i], true_label, name)
     precision = correct_num / number_of_examples
     summary = tf.Summary()
     summary.value.add(tag='Accuracy_' + name, simple_value=precision)
