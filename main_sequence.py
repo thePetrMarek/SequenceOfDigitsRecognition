@@ -71,21 +71,27 @@ if __name__ == '__main__':
         merged_summary = tf.summary.merge_all()
 
         # Training
-        for step in range(10000 + 1):
+        steps = 1000
+        for step in range(steps + 1):
             batch = get_batch(train, inputs_placeholder, labels_placeholder, keep_prob_placeholder, 0.5)
             loss_value, summary, _ = session.run([loss, merged_summary, training], feed_dict=batch)
             writer.add_summary(summary, step)
             if step % 1000 == 0:
                 print("Step %d, loss %.3f" % (step, loss_value))
+
+                # Visualize at the end of training
+                if step == steps:
+                    visualize = True
+                    print("Saving visualizations")
+                else:
+                    visualize = False
                 print("Train accuracy")
                 evaluate(train, session, evaluation, inputs_placeholder, labels_placeholder, keep_prob_placeholder,
-                         "train", writer,
-                         step, True)
+                         "train", writer, step, visualize)
                 print("Validation accuracy")
                 evaluate(validation, session, evaluation, inputs_placeholder, labels_placeholder, keep_prob_placeholder,
-                         "validation", writer,
-                         step)
+                         "validation", writer, step, visualize)
                 print("Test accuracy")
                 evaluate(test, session, evaluation, inputs_placeholder, labels_placeholder, keep_prob_placeholder,
-                         "test", writer, step)
+                         "test", writer, step, visualize)
                 print()
