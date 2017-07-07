@@ -69,9 +69,9 @@ class Sequence:
             logits = tf.argmax(logits, 2)
             print(logits.shape)
             difference = tf.subtract(labels, logits, name="sub")
-            nonzeros = tf.count_nonzero(difference, axis=1)
+            corrects = tf.count_nonzero(difference, axis=1)
 
-            return self.tf_count(nonzeros, 0), labels
+            return self.tf_count(corrects, 0), logits
 
     def tf_count(self, t, val):
         elements_equal_to_value = tf.equal(t, val)
