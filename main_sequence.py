@@ -57,7 +57,7 @@ def evaluate(dataset, session, operation, inputs_placeholder, labels_placeholder
 
 if __name__ == '__main__':
 
-    # Load model
+    # Load dataset
     train = load_dataset("train.p", False)
     validation = load_dataset("validation.p", False)
     test = load_dataset("test.p", False)
