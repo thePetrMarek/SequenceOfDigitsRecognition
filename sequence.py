@@ -65,13 +65,12 @@ class Sequence:
         with tf.name_scope("evaluation"):
             labels = tf.to_int64(labels)
             labels = tf.argmax(labels, 2)
-            print(labels.shape)
             logits = tf.argmax(logits, 2)
-            print(logits.shape)
             difference = tf.subtract(labels, logits, name="sub")
-            corrects = tf.count_nonzero(difference, axis=1)
+            corrects = tf.count_nonzero(difference, axis=1, name="count_nonzero")
+            corrects = tf.less_equal(corrects, 0, name="is_zero")
 
-            return self.tf_count(corrects, 0), logits
+            return self.tf_count(corrects, True), corrects, logits
 
     def tf_count(self, t, val):
         elements_equal_to_value = tf.equal(t, val)

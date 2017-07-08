@@ -21,20 +21,33 @@ def get_batch(dataset, inputs_placeholder, labels_placeholder, keep_prob_placeho
 
 
 def evaluate(dataset, session, operation, inputs_placeholder, labels_placeholder, keep_prob_placeholder, name,
-             summary_writer, learning_step, visualize_predictions=False):
+             summary_writer, learning_step, visualize_correct=0, visualize_incorrect=0):
     steps_per_epoch = len(dataset['examples']) // 50
     number_of_examples = steps_per_epoch * 50
 
     visualize = Visualize()
+    correct_visualized_counter = 0
+    incorrect_visualized_counter = 0
+
     correct_num = 0
     for step in range(steps_per_epoch):
         batch = get_batch(dataset, inputs_placeholder, labels_placeholder, keep_prob_placeholder, 1)
-        corrects_in_batch, predictions = session.run(operation, feed_dict=batch)
+        corrects_in_batch, corrects_vector, predictions = session.run(operation, feed_dict=batch)
         correct_num += corrects_in_batch
-        if visualize_predictions:
+
+        # visualize correct and incorrect recognitions
+        if incorrect_visualized_counter < visualize_incorrect or correct_visualized_counter < visualize_correct:
             for i in range(len(batch[inputs_placeholder])):
                 true_label = np.argmax(batch[labels_placeholder][i], axis=1)
-                visualize.visualize_with_correct(batch[inputs_placeholder][i], predictions[i], true_label, name)
+                if correct_visualized_counter < visualize_correct and corrects_vector[i] == True:
+                    visualize.visualize_with_correct(batch[inputs_placeholder][i], predictions[i], true_label,
+                                                     name + "_correct")
+                    correct_visualized_counter += 1
+                elif incorrect_visualized_counter < visualize_incorrect and corrects_vector[i] == False:
+                    visualize.visualize_with_correct(batch[inputs_placeholder][i], predictions[i], true_label,
+                                                     name + "_incorrect")
+                    incorrect_visualized_counter += 1
+
     precision = correct_num / number_of_examples
     summary = tf.Summary()
     summary.value.add(tag='Accuracy_' + name, simple_value=precision)
@@ -71,7 +84,7 @@ if __name__ == '__main__':
         merged_summary = tf.summary.merge_all()
 
         # Training
-        steps = 1000
+        steps = 0
         for step in range(steps + 1):
             batch = get_batch(train, inputs_placeholder, labels_placeholder, keep_prob_placeholder, 0.5)
             loss_value, summary, _ = session.run([loss, merged_summary, training], feed_dict=batch)
@@ -81,17 +94,20 @@ if __name__ == '__main__':
 
                 # Visualize at the end of training
                 if step == steps:
-                    visualize = True
+                    visualize_correct_count = 100
+                    visualize_incorrect_count = 100
                     print("Saving visualizations")
                 else:
-                    visualize = False
+                    visualize_correct_count = 0
+                    visualize_incorrect_count = 0
+
                 print("Train accuracy")
                 evaluate(train, session, evaluation, inputs_placeholder, labels_placeholder, keep_prob_placeholder,
-                         "train", writer, step, visualize)
+                         "train", writer, step, visualize_correct_count, visualize_incorrect_count)
                 print("Validation accuracy")
                 evaluate(validation, session, evaluation, inputs_placeholder, labels_placeholder, keep_prob_placeholder,
-                         "validation", writer, step, visualize)
+                         "validation", writer, step, visualize_correct_count, visualize_incorrect_count)
                 print("Test accuracy")
                 evaluate(test, session, evaluation, inputs_placeholder, labels_placeholder, keep_prob_placeholder,
-                         "test", writer, step, visualize)
+                         "test", writer, step, visualize_correct_count, visualize_incorrect_count)
                 print()
