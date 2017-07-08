@@ -7,7 +7,7 @@ Recurrent model for sequence recognition with dropout
 
 class Sequence:
     def get_name(self):
-        return "sequence_dropout"
+        return "sequence" # TODO rename
 
     def input_placeholders(self):
         inputs_placeholder = tf.placeholder(tf.float32, shape=[None, 28, 140], name="inputs")

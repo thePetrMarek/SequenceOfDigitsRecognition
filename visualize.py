@@ -10,7 +10,7 @@ class Visualize:
     def visualize_with_correct(self, image, recognized_label, correct_label, folder):
         # TODO check if folder already exists
         try:
-            os.mkdir(folder)
+            os.makedirs(folder)
         except:
             pass
         plt.imshow(image, cmap='gray')

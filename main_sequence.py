@@ -1,5 +1,6 @@
 import tensorflow as tf
 import numpy as np
+import os
 
 from prepare_dataset import load_dataset
 from sequence import Sequence
@@ -83,14 +84,27 @@ if __name__ == '__main__':
         # Summaries
         merged_summary = tf.summary.merge_all()
 
+        # Saver to save checkpoints
+        saver = tf.train.Saver(max_to_keep=4)
+
         # Training
-        steps = 0
+        steps = 10000
         for step in range(steps + 1):
-            batch = get_batch(train, inputs_placeholder, labels_placeholder, keep_prob_placeholder, 0.5)
+            batch = get_batch(train, inputs_placeholder, labels_placeholder, keep_prob_placeholder,
+                              1)  # TODO return dropout
             loss_value, summary, _ = session.run([loss, merged_summary, training], feed_dict=batch)
             writer.add_summary(summary, step)
             if step % 1000 == 0:
                 print("Step %d, loss %.3f" % (step, loss_value))
+
+                # Save checkpoint
+                # TODO if folder exists
+                print("Creating checkpoint")
+                try:
+                    os.makedirs(os.path.join("checkpoints", model.get_name()))
+                except:
+                    pass
+                saver.save(session, os.path.join("checkpoints", model.get_name(), model.get_name()), global_step=step)
 
                 # Visualize at the end of training
                 if step == steps:
