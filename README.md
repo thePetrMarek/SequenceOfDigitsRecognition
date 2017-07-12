@@ -59,7 +59,7 @@ Recurrent model uses the same convolutional layers as [Convolutional model](http
 ### Recurrent model with bigger output layer
 [sequence_bigger_output.py](sequence_of_digits/sequence_bigger_output.py)
 
-It is the improvement of the [Recurrent model](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#recurrent-model). The single fully connected output layer is replaced by three fully connected layers. There is dropout between the first and the second, and second and the third. You can tune ropout by keep_prob parameter int he [main_sequence.py](sequence_of_digits/main_sequence.py). It achieves slightly better accuracy then the [Recurrent model](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#recurrent-model).
+It is the improvement of the [Recurrent model](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#recurrent-model). The single fully connected output layer is replaced by three fully connected layers and relu activation functions. There is dropout between the first and the second, and second and the third. You can tune ropout by keep_prob parameter int he [main_sequence.py](sequence_of_digits/main_sequence.py). It achieves slightly better accuracy then the [Recurrent model](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#recurrent-model).
 
 <div align="center">
   <img src="http://petr-marek.com/wp-content/uploads/2017/07/Recurrence_bigger_output_dropout.png" width="700px">
