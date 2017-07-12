@@ -1,6 +1,8 @@
 # Sequence of digits recognition
 Recognition of sequence of digits using tensorflow. All experiments, descriptions together with images of models and performances are described in [Sequence of digits recognition](http://petr-marek.com/blog/2017/07/05/sequence-digits-recognition/ "Sequence of digits recognition").
 
+![Sequence of digits recognition](http://petr-marek.com/wp-content/uploads/2017/07/Sn%C3%ADmek-obrazovky-68.png)
+
 ## How to use
 ### Single digit recognition
 Main file for single digit recognition is [main_single_digit.py](main_single_digit.py). Choose model in the main method and run it by:
@@ -20,22 +22,36 @@ The next step is to run main file for training of the sequence recognition model
 
 ## Models
 ### Single digit recognition
-Single digit recognition uses Mnist dataset from tensorflow.
+Single digit recognition uses Mnist dataset from tensorflow. The code is in the [single_digit](single_digit) folder.
 
 #### Single layer feedforward model
 [feed_forward.py](feed_forward.py)
+
 Single layer feedforward model is baseline model.
 
 #### Two layers feedforward model
 [feed_forward_two_layers.py](feed_forward_two_layers.py)
+
 Two layers feedforward model mainly tests the connection of two layers.
 
 #### Convolutional model
 [convolutional.py](convolutional.py)
+
 Convolutional model containing three layers of convolution, relu and max pooling, followed by three fully connected layers.
+
+<div align="center">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/conv.png" width="200px">
+</div>
+
 
 ### Sequence of digits recognition
 Sequence of digits recognition uses dataset of digit sequences created by concatenation of digits from Mnist dataset. You can create the dataset as described in the section [How to use](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#how-to-use).
 
 #### Recurrent model
+[sequence.py](sequence.py)
+
 Recurrent model uses the same convolutional layers as [Convolutional model](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#convolutional-model). The three fully connected layers are replaced by five times unrolled GRU units followed by single fully connected layer.
+
+<div align="center">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/sequence-network.png" width="700px">
+</div>

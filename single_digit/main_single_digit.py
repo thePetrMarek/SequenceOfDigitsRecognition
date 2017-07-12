@@ -1,9 +1,6 @@
-from tensorflow.examples.tutorials.mnist import input_data
 import tensorflow as tf
-
 from convolutional import Convolutional
-from feed_forward import Feed_forward
-from feed_forward_two_layers import Feed_forward_two_layers
+from tensorflow.examples.tutorials.mnist import input_data
 
 '''
 Main file for running of single digit recognition models

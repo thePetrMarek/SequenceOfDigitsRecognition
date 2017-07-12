@@ -1,13 +1,15 @@
-import tensorflow as tf
-import numpy as np
 import os
 
+import numpy as np
+import tensorflow as tf
+
 from prepare_dataset import load_dataset
-from sequence import Sequence
+from sequence_reshaped_convolution_batchnom import SequenceReshapedConvolutionBatchnorm
 from visualize import Visualize
 
 
-def get_batch(dataset, inputs_placeholder, labels_placeholder, keep_prob_placeholder, keep_prob_val):
+def get_batch(dataset, inputs_placeholder, labels_placeholder, keep_prob_placeholder, keep_prob_val,
+              is_training_placeholder, is_traininig):
     if "position" not in dataset:
         dataset["position"] = 0
     position = dataset["position"]
@@ -18,10 +20,12 @@ def get_batch(dataset, inputs_placeholder, labels_placeholder, keep_prob_placeho
     if position == steps_per_epoch:
         position = 0
     dataset["position"] = position
-    return {inputs_placeholder: inputs, labels_placeholder: labels, keep_prob_placeholder: keep_prob_val}
+    return {inputs_placeholder: inputs, labels_placeholder: labels, keep_prob_placeholder: keep_prob_val,
+            is_training_placeholder: is_traininig}
 
 
-def evaluate(dataset, session, operation, inputs_placeholder, labels_placeholder, keep_prob_placeholder, name,
+def evaluate(dataset, session, operation, inputs_placeholder, labels_placeholder, keep_prob_placeholder,
+             is_training_placeholder, name,
              summary_writer, learning_step, visualize_correct=0, visualize_incorrect=0):
     steps_per_epoch = len(dataset['examples']) // 50
     number_of_examples = steps_per_epoch * 50
@@ -32,7 +36,8 @@ def evaluate(dataset, session, operation, inputs_placeholder, labels_placeholder
 
     correct_num = 0
     for step in range(steps_per_epoch):
-        batch = get_batch(dataset, inputs_placeholder, labels_placeholder, keep_prob_placeholder, 1)
+        batch = get_batch(dataset, inputs_placeholder, labels_placeholder, keep_prob_placeholder, 1,
+                          is_training_placeholder, False)
         corrects_in_batch, corrects_vector, predictions = session.run(operation, feed_dict=batch)
         correct_num += corrects_in_batch
 
@@ -65,9 +70,15 @@ if __name__ == '__main__':
 
     with tf.Graph().as_default():
         # Wiring
-        model = Sequence()
-        inputs_placeholder, labels_placeholder, keep_prob_placeholder = model.input_placeholders()
-        logits = model.inference(inputs_placeholder, keep_prob_placeholder)
+        # model = Sequence()
+        # model = SequenceSmallerRecurrence()
+        # model = SequenceBiggerOutput()
+        # model = SequenceReshapedConvolution()
+        # model = SequenceReshapedConvolutionDeeper()
+        model = SequenceReshapedConvolutionBatchnorm()
+
+        inputs_placeholder, labels_placeholder, keep_prob_placeholder, is_training_placeholder = model.input_placeholders()
+        logits = model.inference(inputs_placeholder, keep_prob_placeholder, is_training_placeholder)
         loss = model.loss(logits, labels_placeholder)
         training = model.training(loss, 0.0001)
         evaluation = model.evaluation(logits, labels_placeholder)
@@ -88,10 +99,10 @@ if __name__ == '__main__':
         saver = tf.train.Saver(max_to_keep=4)
 
         # Training
-        steps = 10000
+        steps = 30000
         for step in range(steps + 1):
-            batch = get_batch(train, inputs_placeholder, labels_placeholder, keep_prob_placeholder,
-                              1)  # TODO return dropout
+            batch = get_batch(train, inputs_placeholder, labels_placeholder, keep_prob_placeholder, 0.85,
+                              is_training_placeholder, True)
             loss_value, summary, _ = session.run([loss, merged_summary, training], feed_dict=batch)
             writer.add_summary(summary, step)
             if step % 1000 == 0:
@@ -117,11 +128,14 @@ if __name__ == '__main__':
 
                 print("Train accuracy")
                 evaluate(train, session, evaluation, inputs_placeholder, labels_placeholder, keep_prob_placeholder,
-                         "train", writer, step, visualize_correct_count, visualize_incorrect_count)
+                         is_training_placeholder, "train", writer, step, visualize_correct_count,
+                         visualize_incorrect_count)
                 print("Validation accuracy")
                 evaluate(validation, session, evaluation, inputs_placeholder, labels_placeholder, keep_prob_placeholder,
-                         "validation", writer, step, visualize_correct_count, visualize_incorrect_count)
+                         is_training_placeholder, "validation", writer, step, visualize_correct_count,
+                         visualize_incorrect_count)
                 print("Test accuracy")
                 evaluate(test, session, evaluation, inputs_placeholder, labels_placeholder, keep_prob_placeholder,
-                         "test", writer, step, visualize_correct_count, visualize_incorrect_count)
+                         is_training_placeholder, "test", writer, step, visualize_correct_count,
+                         visualize_incorrect_count)
                 print()

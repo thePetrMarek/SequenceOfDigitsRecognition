@@ -5,17 +5,18 @@ Recurrent model for sequence recognition with dropout
 '''
 
 
-class Sequence:
+class SequenceSmallerRecurrence:
     def get_name(self):
-        return "sequence" # TODO rename
+        return "sequence_smaller_recurrence"
 
     def input_placeholders(self):
         inputs_placeholder = tf.placeholder(tf.float32, shape=[None, 28, 140], name="inputs")
         labels_placeholder = tf.placeholder(tf.float32, shape=[None, 5, 10], name="labels")
         keep_prob_placeholder = tf.placeholder(tf.float32)
-        return inputs_placeholder, labels_placeholder, keep_prob_placeholder
+        is_training_placeholder = tf.placeholder(tf.bool)
+        return inputs_placeholder, labels_placeholder, keep_prob_placeholder, is_training_placeholder
 
-    def inference(self, input, keep_prob):
+    def inference(self, input, keep_prob, is_training):
         with tf.name_scope("inference"):
             input = tf.reshape(input, [-1, 28, 140, 1])
             conv1 = self._convolutional(input, [5, 5, 1, 32])
@@ -36,13 +37,13 @@ class Sequence:
             reshaped = tf.reshape(max_pool3, [-1, 576])
 
             logits = []
-            gru = tf.contrib.rnn.GRUCell(576)
+            gru = tf.contrib.rnn.GRUCell(256)
             state = gru.zero_state(tf.shape(reshaped)[0], tf.float32)
             with tf.variable_scope("RNN"):
                 for i in range(5):
                     if i > 0: tf.get_variable_scope().reuse_variables()
                     output, state = gru(reshaped, state)
-                    number_logits = self._fully_connected(output, 576, 10)
+                    number_logits = self._fully_connected(output, 256, 10)
                     logits.append(number_logits)
             return tf.stack(logits, axis=1)
 
