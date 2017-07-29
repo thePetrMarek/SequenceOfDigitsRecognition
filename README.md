@@ -74,7 +74,8 @@ size of convolutions and number of their filters. The size of convolution is dec
 #### Recurrent model with reshaped convolution and batch normalization
 [sequence_reshaped_convolution_batchnorm.py](sequence_of_digits/sequence_reshaped_convolution_batchnorm.py)
 
-It is model similar to [sequence_reshaped_convolution.py](sequence_of_digits/sequence_reshaped_convolution.py) and it adds batch normalization layers.
+It is model similar to [sequence_reshaped_convolution.py](sequence_of_digits/sequence_reshaped_convolution.py) and it adds batch normalization layers. This model achieves the best accuracy on the testing set.
+The convolutional part of the model is shown bellow.
 
 <div align="center">
   <img src="http://petr-marek.com/wp-content/uploads/2017/07/Batchnorm_model.png" width="700px">
