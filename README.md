@@ -98,6 +98,6 @@ It is model doubling the layers of the [sequence_reshaped_convolution_batchnorm.
 The convolutional part of the model is shown bellow.
 
 <div align="center">
-  <img src="http://petr-marek.com/wp-content/uploads/2017/07/double-architecture-2.png" width="300px">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/double-architecture-2.png" width="250px">
 </div>
  
