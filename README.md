@@ -47,6 +47,10 @@ Convolutional model containing three layers of convolution, relu and max pooling
 ### Sequence of digits recognition
 Sequence of digits recognition uses dataset of digit sequences created by concatenation of digits from Mnist dataset. You can create the dataset as described in the section [How to use](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#how-to-use).
 
+<div align="center">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/Train-e1499360959701.png" width="700px">
+</div>
+
 #### Recurrent model
 [sequence.py](sequence_of_digits/sequence.py)
 
