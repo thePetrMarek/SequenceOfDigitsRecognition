@@ -88,5 +88,5 @@ It is model adding the fourth convolutional layer to [sequence_reshaped_convolut
 The convolutional part of the model is shown bellow.
 
 <div align="center">
-  <img src="http://petr-marek.com/wp-content/uploads/2017/07/deeper_architecture.png" width="700px">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/deeper_architecture.png" width="200px">
 </div>
