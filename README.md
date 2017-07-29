@@ -80,3 +80,13 @@ The convolutional part of the model is shown bellow.
 <div align="center">
   <img src="http://petr-marek.com/wp-content/uploads/2017/07/Batchnorm_model.png" width="700px">
 </div>
+
+#### Recurrent model with deeper convolution
+[sequence_reshaped_convolution_deeper.py](sequence_of_digits/sequence_reshaped_convolution_deeper.py)
+
+It is model adding the fourth convolutional layer to [sequence_reshaped_convolution.py](sequence_of_digits/sequence_reshaped_convolution.py).
+The convolutional part of the model is shown bellow.
+
+<div align="center">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/deeper_architecture.png" width="700px">
+</div>
