@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 
 from prepare_dataset import load_dataset
-from sequence_of_digits.sequence_reshaped_convolution_batchnom import SequenceReshapedConvolutionBatchnorm
+from sequence_of_digits.sequence_reshaped_convolution_batchnorm import SequenceReshapedConvolutionBatchnorm
 from visualize import Visualize
 
 
