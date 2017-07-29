@@ -101,3 +101,8 @@ The convolutional part of the model is shown bellow.
   <img src="http://petr-marek.com/wp-content/uploads/2017/07/double-architecture-2.png" width="250px">
 </div>
  
+#### Recurrent model with overlapping stride
+[sequence_reshaped_convolution_batchnorm_stride.py](sequence_of_digits/sequence_reshaped_convolution_batchnorm_stride.py)
+
+It is the same model as [sequence_reshaped_convolution_batchnorm.py](sequence_of_digits/sequence_reshaped_convolution_batchnorm.py) except the stride of max pooling layers.
+The max pooled regions are overlapped.
