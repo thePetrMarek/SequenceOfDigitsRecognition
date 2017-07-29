@@ -90,3 +90,14 @@ The convolutional part of the model is shown bellow.
 <div align="center">
   <img src="http://petr-marek.com/wp-content/uploads/2017/07/deeper_architecture.png" width="300px">
 </div>
+
+#### Recurrent model with doubled layers
+[sequence_reshaped_convolution_batchnorm_double.py](sequence_of_digits/sequence_reshaped_convolution_batchnorm_double.py)
+
+It is model doubling the layers of the [sequence_reshaped_convolution_batchnorm.py](sequence_of_digits/sequence_reshaped_convolution_batchnorm.py). 
+The convolutional part of the model is shown bellow.
+
+<div align="center">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/double-architecture-2.png" width="300px">
+</div>
+ 
