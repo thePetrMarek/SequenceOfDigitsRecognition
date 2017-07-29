@@ -56,7 +56,7 @@ Recurrent model uses the same convolutional layers as [Convolutional model](http
   <img src="http://petr-marek.com/wp-content/uploads/2017/07/sequence-network.png" width="700px">
 </div>
 
-### Recurrent model with bigger output layer
+#### Recurrent model with bigger output layer
 [sequence_bigger_output.py](sequence_of_digits/sequence_bigger_output.py)
 
 It is the improvement of the [Recurrent model](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#recurrent-model). The single fully connected output layer is replaced by three fully connected layers and relu activation functions. There is dropout between the first and the second, and second and the third. You can tune ropout by keep_prob parameter int he [main_sequence.py](sequence_of_digits/main_sequence.py). It achieves slightly better accuracy then the [Recurrent model](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#recurrent-model).
@@ -64,3 +64,9 @@ It is the improvement of the [Recurrent model](https://github.com/thePetrMarek/S
 <div align="center">
   <img src="http://petr-marek.com/wp-content/uploads/2017/07/Recurrence_bigger_output_dropout.png" width="700px">
 </div>
+
+#### Recurrent model with reshaped convolution
+[sequence_reshaped_convolution.py](sequence_of_digits/sequence_reshaped_convolution.py)
+
+It is model with same layers as [sequence.py](sequence_of_digits/sequence.py). The change is in the 
+size of convolutions and number of their filters. The size of convolution is decreasing and the number of filters are increasing in the layers.
