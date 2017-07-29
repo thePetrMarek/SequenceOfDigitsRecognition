@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 
 from prepare_dataset import load_dataset
-from sequence_reshaped_convolution_batchnom import SequenceReshapedConvolutionBatchnorm
+from sequence_of_digits.sequence_reshaped_convolution_batchnom import SequenceReshapedConvolutionBatchnorm
 from visualize import Visualize
 
 
@@ -71,11 +71,10 @@ if __name__ == '__main__':
     with tf.Graph().as_default():
         # Wiring
         # model = Sequence()
-        # model = SequenceSmallerRecurrence()
         # model = SequenceBiggerOutput()
         # model = SequenceReshapedConvolution()
-        # model = SequenceReshapedConvolutionDeeper()
         model = SequenceReshapedConvolutionBatchnorm()
+        # model = SequenceReshapedConvolutionDeeper()
 
         inputs_placeholder, labels_placeholder, keep_prob_placeholder, is_training_placeholder = model.input_placeholders()
         logits = model.inference(inputs_placeholder, keep_prob_placeholder, is_training_placeholder)

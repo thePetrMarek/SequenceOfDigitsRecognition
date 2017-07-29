@@ -70,3 +70,12 @@ It is the improvement of the [Recurrent model](https://github.com/thePetrMarek/S
 
 It is model with same layers as [sequence.py](sequence_of_digits/sequence.py). The change is in the 
 size of convolutions and number of their filters. The size of convolution is decreasing and the number of filters are increasing in the layers.
+
+#### Recurrent model with reshaped convolution and batch normalization
+[sequence_reshaped_convolution_batchnorm.py](sequence_of_digits/sequence_reshaped_convolution_batchnorm.py)
+
+It is model similar to [sequence_reshaped_convolution.py](sequence_of_digits/sequence_reshaped_convolution.py) and it adds batch normalization layers.
+
+<div align="center">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/Batchnorm_model.png" width="700px">
+</div>
