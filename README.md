@@ -25,7 +25,7 @@ The next step is to run main file for training of the sequence recognition model
 Single digit recognition uses Mnist dataset from tensorflow.
 
 <div align="center">
-  <img src="http://petr-marek.com/wp-content/uploads/2017/07/decompressed.jpg" width="256px">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/decompressed.jpg" width="200px">
 </div>
 
 #### Single layer feedforward model
