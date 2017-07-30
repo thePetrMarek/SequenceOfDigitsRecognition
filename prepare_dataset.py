@@ -6,8 +6,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pickle
 
-from localization_dataset import LocalizationDataset
-
 '''
 Creates dataset of digit sequences by concatenating of mnist digits
 
