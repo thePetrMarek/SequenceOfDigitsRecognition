@@ -1,7 +1,12 @@
+from random import randrange
+
+from matplotlib import patches
 from tensorflow.examples.tutorials.mnist import input_data
 import numpy as np
 import matplotlib.pyplot as plt
 import pickle
+
+from localization_dataset import LocalizationDataset
 
 '''
 Creates dataset of digit sequences by concatenating of mnist digits
@@ -12,6 +17,8 @@ Params:
     length - the length of digit sequences
     debug - show generated examples
 '''
+
+
 def make_dataset(dataset, num_examples, length, debug=False):
     examples = []
     labels = []
@@ -40,6 +47,50 @@ def make_dataset(dataset, num_examples, length, debug=False):
         labels.append(label)
     return {"examples": examples, "labels": labels}
 
+
+'''
+Makes dataset for localization
+
+Params:
+    dataset - dataset of sequences to use (created by function make_dataset())
+    height - height of new images
+    length - width of new images
+    debug - show generated examples
+'''
+
+
+def make_localization_dataset(dataset, pickle_file_name, height, width, debug=False):
+    f = open(pickle_file_name, 'wb')
+    for i in range(len(dataset["examples"])):
+        example = dataset["examples"][i]
+        label = dataset["labels"][i]
+        new_example = np.zeros([height, width])
+        max_h = height - example.shape[0]
+        max_w = width - example.shape[1]
+        h_transition = randrange(max_h)
+        w_transition = randrange(max_w)
+        x = w_transition + int(example.shape[1] / 2)
+        y = h_transition + int(example.shape[0] / 2)
+        h = example.shape[0]
+        w = example.shape[1]
+
+        new_example[h_transition:h_transition + example.shape[0],
+        w_transition:w_transition + example.shape[1]] = example
+        position = [x, y, h, w]
+        pickle.dump({"example": new_example, "label": label, "position": position}, f)
+
+        if debug:
+            print(position)
+            fig, ax = plt.subplots(1)
+            ax.imshow(new_example, cmap='gray')
+            rect = patches.Rectangle((x - (w / 2), y - (h / 2)), w, h, linewidth=1, edgecolor='r', facecolor='none')
+            point = patches.Rectangle((x, y), 1, 1, linewidth=1, edgecolor='r', facecolor='none')
+            ax.add_patch(rect)
+            ax.add_patch(point)
+            plt.show()
+    f.close()
+
+
 '''
 Loads dataset from pickle file
 
@@ -47,6 +98,8 @@ Params:
     file_name - name of pickle file
     debug - show generated examples
 '''
+
+
 def load_dataset(file_name, debug=False):
     dataset = pickle.load(open(file_name, "rb"))
     if debug:
@@ -56,27 +109,30 @@ def load_dataset(file_name, debug=False):
             plt.show()
     return dataset
 
+
 if __name__ == '__main__':
     mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 
     print("Creating testing dataset")
     train_dataset = make_dataset(mnist.train, 165000, 5)
     pickle.dump(train_dataset, open("train.p", "wb"))
+    print("Creating testing dataset for localization")
+    make_localization_dataset(train_dataset, "train_localization.p", 128, 256, False)
     train_dataset = []
     print("Done")
 
     print("Creating validation dataset")
     validation_dataset = make_dataset(mnist.validation, 15000, 5)
     pickle.dump(validation_dataset, open("validation.p", "wb"))
+    print("Creating validation dataset for localization")
+    make_localization_dataset(validation_dataset, "validation_localization.p", 128, 256, False)
     validation_dataset = []
     print("Done")
 
     print("Creating testing dataset")
     test_dataset = make_dataset(mnist.test, 30000, 5)
     pickle.dump(test_dataset, open("test.p", "wb"))
+    print("Creating testing dataset for localization")
+    make_localization_dataset(test_dataset, "test_localization.p", 128, 256, False)
     test_dataset = []
     print("Done")
-
-    load_dataset("train.p", True)
-    load_dataset("validation.p", True)
-    load_dataset("test.p", True)
