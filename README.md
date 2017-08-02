@@ -114,3 +114,11 @@ The convolutional part of the model is shown bellow.
 
 It is the same model as [sequence_reshaped_convolution_batchnorm.py](sequence_of_digits/sequence_reshaped_convolution_batchnorm.py) except the stride of max pooling layers.
 The max pooled regions are overlapped.
+
+### Sequence of digits recognition and localization
+Sequence of digits recognition and localization uses dataset of digit sequences created by concatenation of digits from Mnist dataset. The digit sequences are placed on the random location of canvas. You can create the dataset as described in the section [How to use](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#how-to-use).
+The task is to correctly classify the sequence of numbers and to localize it. The location of sequence is defened by x, y coordinates and width and height of bounding box.
+
+<div align="center">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/loc-e1501527743191.png" width="700px">
+</div>
