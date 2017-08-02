@@ -14,11 +14,22 @@ You will need to create dataset of sequences of digits. The dataset is created b
 
     py -3 prepare_dataset.py
 
-Three pickle files will be created containing training, validation and testing datasets.
+Three pickle files (train.p, validation.p, test.p) will be created containing training, validation and testing datasets.
 
 The next step is to run main file for training of the sequence recognition models. The file for it is [main_sequence.py](sequence_of_digits/main_sequence.py) in the [sequence_of_digits](sequence_of_digits) folder. Open the folder, choose the model in the main method and run the training by:
 
     py -3 main_sequence.py
+
+### Sequence of digits recognition and localiyation
+You will need to create dataset of sequences of digits. The dataset is created by concatenation of mnist digits. The code for it is in the [prepare_dataset.py](prepare_dataset.py). Run it by:
+
+    py -3 prepare_dataset.py
+    
+Three pickle files (train_localization.p, validation_localization.p, test_localization.p) will be created containing training, validation and testing datasets.
+
+The next step is to run main file for training of the sequence recognition models. The file for it is [main_sequence_localization.py](sequence_of_digits_localization/main_sequence_localization.py) in the [sequence_of_digits_localization](sequence_of_digits_localization) folder. Open the folder, choose the model in the main method and run the training by:
+
+    py -3 main_sequence_localization.py
 
 ## Models
 ### Single digit recognition
@@ -117,6 +128,7 @@ The max pooled regions are overlapped.
 
 ### Sequence of digits recognition and localization
 Sequence of digits recognition and localization uses dataset of digit sequences created by concatenation of digits from Mnist dataset. The digit sequences are placed on the random location of canvas. You can create the dataset as described in the section [How to use](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#how-to-use).
+
 The task is to correctly classify the sequence of numbers and to localize it. The location of sequence is defened by x, y coordinates and width and height of bounding box.
 
 <div align="center">
