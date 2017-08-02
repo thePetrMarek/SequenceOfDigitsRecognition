@@ -9,11 +9,16 @@ class LocalizationDataset:
         self.file_name = file_name
 
     def load(self, count, debug=False):
-        to_return = []
+        examples = []
+        labels = []
+        positions = []
+        end_of_file = False
         for i in range(count):
             try:
                 object = pickle.load(self.file)
-                to_return.append(object)
+                examples.append(object["example"])
+                labels.append(object["label"])
+                positions.append(object["position"])
                 if debug:
                     fig, ax = plt.subplots(1)
                     ax.imshow(object["example"], cmap='gray')
@@ -31,4 +36,5 @@ class LocalizationDataset:
             except EOFError:
                 self.file = open(self.file_name, 'rb')
                 i -= 1
-        return to_return
+                end_of_file = True
+        return {"examples": examples, "labels": labels, "positions": positions, "end_of_file": end_of_file}
