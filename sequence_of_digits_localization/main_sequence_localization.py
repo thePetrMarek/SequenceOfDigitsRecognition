@@ -73,9 +73,9 @@ def evaluate(dataset, session, operation, inputs_placeholder, labels_placeholder
     position_error = total_position_error / (number_of_examples / 50)
 
     summary = tf.Summary()
-    summary.value.add(tag='Sequence_accuracy'+name, simple_value=sequence_accuracy)
-    summary.value.add(tag='Character_accuracy'+name, simple_value=character_accuracy)
-    summary.value.add(tag='Possition_error'+name, simple_value=position_error)
+    summary.value.add(tag='Sequence_accuracy_'+name, simple_value=sequence_accuracy)
+    summary.value.add(tag='Character_accuracy_'+name, simple_value=character_accuracy)
+    summary.value.add(tag='Position_error_'+name, simple_value=position_error)
     summary_writer.add_summary(summary, learning_step)
 
     print("Number of correct examples: " + str(correct_num) + "/" + str(number_of_examples))
