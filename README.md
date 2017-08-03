@@ -16,18 +16,18 @@ You will need to create dataset of sequences of digits. The dataset is created b
 
 Three pickle files (train.p, validation.p, test.p) will be created containing training, validation and testing datasets.
 
-The next step is to run main file for training of the sequence recognition models. The file for it is [main_sequence.py](sequence_of_digits/main_sequence.py) in the [sequence_of_digits](sequence_of_digits) folder. Open the folder, choose the model in the main method and run the training by:
+The next step is to run main file for training of the sequence recognition models. Main file for it is [main_sequence.py](sequence_of_digits/main_sequence.py) in the [sequence_of_digits](sequence_of_digits) folder. Open the folder, choose the model in the main method and run the training by:
 
     py -3 main_sequence.py
 
-### Sequence of digits recognition and localiyation
+### Sequence of digits recognition and localization
 You will need to create dataset of sequences of digits. The dataset is created by concatenation of mnist digits. The code for it is in the [prepare_dataset.py](prepare_dataset.py). Run it by:
 
     py -3 prepare_dataset.py
     
 Three pickle files (train_localization.p, validation_localization.p, test_localization.p) will be created containing training, validation and testing datasets.
 
-The next step is to run main file for training of the sequence recognition models. The file for it is [main_sequence_localization.py](sequence_of_digits_localization/main_sequence_localization.py) in the [sequence_of_digits_localization](sequence_of_digits_localization) folder. Open the folder, choose the model in the main method and run the training by:
+The next step is to run main file for training of the sequence recognition models. Main file for it is [main_sequence_localization.py](sequence_of_digits_localization/main_sequence_localization.py) in the [sequence_of_digits_localization](sequence_of_digits_localization) folder. Open the folder, choose the model in the main method and run the training by:
 
     py -3 main_sequence_localization.py
 
