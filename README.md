@@ -134,3 +134,16 @@ The task is to correctly classify the sequence of numbers and to localize it. Th
 <div align="center">
   <img src="http://petr-marek.com/wp-content/uploads/2017/07/loc-e1501527743191.png" width="700px">
 </div>
+
+#### Deep localization model with weighted loss
+[deep_localization_weighted_loss.py](sequence_of_digits_localization/deep_localization_weighted_loss.py)
+
+Model able to learn the classification of sequences of digits and their localization. The loss function is
+
+    loss = 1000 * “classification loss (cross entropy)” + “localization error (meaned squared error)”
+    
+<div align="center">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/graph-runweightLoss.png" width="600px">
+</div>
+
+    
