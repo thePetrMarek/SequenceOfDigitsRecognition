@@ -4,9 +4,7 @@ import numpy as np
 import tensorflow as tf
 
 from localization_dataset import LocalizationDataset
-from sequence_of_digits_localization.deep_localization import DeepLocalization
 from sequence_of_digits_localization.deep_localization_weighted_loss import DeepLocalizationWeightedLoss
-from sequence_of_digits_localization.sequence_localization import SequenceLocalization
 from visualize import Visualize
 
 
@@ -22,9 +20,10 @@ def get_batch(dataset, inputs_placeholder, labels_placeholder, positions_placeho
                       keep_prob_placeholder: keep_prob_val,
                       is_training_placeholder: is_traininig}, "end_of_file": batch["end_of_file"]}
 
+
 def evaluate(dataset, session, operation, inputs_placeholder, labels_placeholder, positions_placeholder,
              keep_prob_placeholder,
-             is_training_placeholder,model_name, name,
+             is_training_placeholder, model_name, name,
              summary_writer, learning_step, visualize_correct=0, visualize_incorrect=0):
     visualize = Visualize()
     correct_visualized_counter = 0
@@ -58,7 +57,8 @@ def evaluate(dataset, session, operation, inputs_placeholder, labels_placeholder
                     visualize.visualize_with_correct_label_position(batch[inputs_placeholder][i], predictions[i],
                                                                     true_label,
                                                                     predicted_positions[i],
-                                                                    batch[positions_placeholder][i], os.path.join(model_name, name) + "_correct")
+                                                                    batch[positions_placeholder][i],
+                                                                    os.path.join(model_name, name) + "_correct")
                     correct_visualized_counter += 1
                 elif incorrect_visualized_counter < visualize_incorrect and corrects_vector[i] == False:
                     visualize.visualize_with_correct_label_position(batch[inputs_placeholder][i], predictions[i],
@@ -73,9 +73,9 @@ def evaluate(dataset, session, operation, inputs_placeholder, labels_placeholder
     position_error = total_position_error / (number_of_examples / 50)
 
     summary = tf.Summary()
-    summary.value.add(tag='Sequence_accuracy_'+name, simple_value=sequence_accuracy)
-    summary.value.add(tag='Character_accuracy_'+name, simple_value=character_accuracy)
-    summary.value.add(tag='Position_error_'+name, simple_value=position_error)
+    summary.value.add(tag='Sequence_accuracy_' + name, simple_value=sequence_accuracy)
+    summary.value.add(tag='Character_accuracy_' + name, simple_value=character_accuracy)
+    summary.value.add(tag='Position_error_' + name, simple_value=position_error)
     summary_writer.add_summary(summary, learning_step)
 
     print("Number of correct examples: " + str(correct_num) + "/" + str(number_of_examples))
@@ -94,8 +94,6 @@ if __name__ == '__main__':
 
     with tf.Graph().as_default():
         # Wiring
-        #model = SequenceLocalization()
-        #model = DeepLocalization()
         model = DeepLocalizationWeightedLoss()
 
         inputs_placeholder, labels_placeholder, positions_placeholder, keep_prob_placeholder, is_training_placeholder = model.input_placeholders()
@@ -150,7 +148,7 @@ if __name__ == '__main__':
                     visualize_incorrect_count = 0
 
                 print("Train accuracy")
-                train_localization_evaluation = LocalizationDataset("../train_localization.p")
+                train_localization_evaluation = LocalizationDataset("../train_variable_localization.p")
                 evaluate(train_localization_evaluation, session, evaluation, inputs_placeholder, labels_placeholder,
                          positions_placeholder,
                          keep_prob_placeholder,
@@ -158,7 +156,7 @@ if __name__ == '__main__':
                          visualize_correct_count,
                          visualize_incorrect_count)
                 print("Validation accuracy")
-                validation_localization_evaluation = LocalizationDataset("../validation_localization.p")
+                validation_localization_evaluation = LocalizationDataset("../validation_variable_localization.p")
                 evaluate(validation_localization_evaluation, session, evaluation, inputs_placeholder,
                          labels_placeholder, positions_placeholder,
                          keep_prob_placeholder,
@@ -166,7 +164,7 @@ if __name__ == '__main__':
                          visualize_correct_count,
                          visualize_incorrect_count)
                 print("Test accuracy")
-                test_localization_evaluation = LocalizationDataset("../test_localization.p")
+                test_localization_evaluation = LocalizationDataset("../test_variable_localization.p")
                 evaluate(test_localization_evaluation, session, evaluation, inputs_placeholder, labels_placeholder,
                          positions_placeholder,
                          keep_prob_placeholder,
