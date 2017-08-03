@@ -164,7 +164,7 @@ The task is to classify and to localize sequence of digits again, but the sequen
 You can create the dataset as described in the section [How to use](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#how-to-use).
 
 <div align="center">
-  <img src="hhttp://petr-marek.com/wp-content/uploads/2017/07/variable_length_dataset-e1501790547739.png" width="700px">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/variable_length_dataset-e1501790547739.png" width="700px">
 </div>
 
 #### Deep localization model with weighted loss for variable length
