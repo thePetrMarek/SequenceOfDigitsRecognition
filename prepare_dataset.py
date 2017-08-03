@@ -214,5 +214,5 @@ if __name__ == '__main__':
     print("Done")
 
     print("Creating variable length localization testing dataset")
-    make_variable_length_dataset(mnist.validation, "testing_variable_localization.p", 30000, 5, 128, 256, debug=False)
+    make_variable_length_dataset(mnist.validation, "test_variable_localization.p", 30000, 5, 128, 256, debug=False)
     print("Done")
