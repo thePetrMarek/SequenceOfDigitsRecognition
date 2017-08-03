@@ -31,6 +31,18 @@ The next step is to run main file for training of the sequence recognition model
 
     py -3 main_sequence_localization.py
 
+### Sequences of digits with variable lenght
+You will need to create dataset of sequences of digits. The dataset is created by concatenation of mnist digits. The code for it is in the [prepare_dataset.py](prepare_dataset.py). Run it by:
+
+    py -3 prepare_dataset.py
+    
+Three pickle files (train_variable_localization.p, validation_variable_localization.p, test_variable_localization.p) will be created containing training, validation and testing datasets.
+
+The next step is to run main file for training of the sequence recognition models. Main file for it is [main_sequences_variable_length.py](sequences_of_variable_length/main_sequences_variable_length.py) in the [sequences_of_variable_length](sequences_of_variable_length) folder. Open the folder, choose the model in the main method and run the training by:
+
+    py -3 main_sequence_variable_length.py
+
+
 ## Models
 ### Single digit recognition
 Single digit recognition uses Mnist dataset from tensorflow.
@@ -146,4 +158,17 @@ Model able to learn the classification of sequences of digits and their localiza
   <img src="http://petr-marek.com/wp-content/uploads/2017/07/graph-runweightLoss.png" width="600px">
 </div>
 
-    
+### Sequences of variable lengths
+This is generalization of [Sequence of digits recognition and localization](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#sequence-of-digits-recognition-and-localization). 
+The task is to classify and to localize sequence of digits again, but the sequence has variable length this time. The maximal size of sequence is known. 
+You can create the dataset as described in the section [How to use](https://github.com/thePetrMarek/SequenceOfDigitsRecognition#how-to-use).
+
+<div align="center">
+  <img src="hhttp://petr-marek.com/wp-content/uploads/2017/07/variable_length_dataset-e1501790547739.png" width="700px">
+</div>
+
+#### Deep localization model with weighted loss for variable length
+[deep_localization_weighted_loss_variable_length.py](sequences_of_variable_length/deep_localization_weighted_loss_variable_length.py)
+
+This is the same model as [deep_localization_weighted_loss.py](sequence_of_digits_localization/deep_localization_weighted_loss.py). Only difference is the adaptation to 
+output special "no digit" character.
