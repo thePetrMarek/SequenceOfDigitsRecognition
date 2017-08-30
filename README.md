@@ -172,3 +172,8 @@ You can create the dataset as described in the section [How to use](https://gith
 
 This is the same model as [deep_localization_weighted_loss.py](sequence_of_digits_localization/deep_localization_weighted_loss.py). Only difference is the adaptation to 
 output special "no digit" character.
+
+#### Deeper localiyation model with weighted loss for vasibale length
+[deep_localization_weighted_loss_variable_length_deeper.py](sequences_of_variable_length/deep_localization_weighted_loss_variable_length_deeper.py)
+
+This model is almost the same as [deep_localization_weighted_loss_variable_length.py](sequences_of_variable_length/deep_localization_weighted_loss_variable_length.py). Only difference is sixth convolutional layer.
