@@ -192,3 +192,27 @@ This task is to recognize house numbers in real word images taken from Google St
 <div align="center">
   <img src="http://petr-marek.com/wp-content/uploads/2017/07/2-8-8-10-10-10.png" width="700px">
 </div>
+
+#### Deep localization weighted loss variable length
+[deep_localization_weighted_loss_variable_length.py](SVHN_recognition/deep_localization_weighted_loss_variable_length_deep.py)
+
+The same model as [deep_localization_weighted_loss_variable_length.py](sequences_of_variable_length/deep_localization_weighted_loss_variable_length.py), only difference is that it can output six digits instead of five.
+
+#### Paper convolution
+[svhn_paper_convolution.py](SVHN_recognition/svhn_paper_convolution.py)
+
+This model is inspired by paper Multi-digit Number Recognition from Street View Imagery using Deep Convolutional Neural Networks. It also doesn't use reccurent recognition head. It uses six fully connected layers instead. Each for one digit.
+
+#### Paper convolution with dropout
+[svhn_paper_convolution_dropout_output.py](SVHN_recognition/svhn_paper_convolution_dropout_output.py)
+
+This model adds dropout before output layers of model [svhn_paper_convolution.py](SVHN_recognition/svhn_paper_convolution.py).
+
+<div align="center">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/graph-runSVHN_paper_convolution_dropout_output_0.85C.png" width="600px">
+</div>
+
+#### No maxpooling
+[svhn_transfer_learning_no_maxpool.py](SVHN_recognition/svhn_transfer_learning_no_maxpool.py)
+
+This model replaces 2x2 max pooling layers by 2x2 convolutional layers with 2x2 stride.
