@@ -181,7 +181,14 @@ You can create the dataset as described in the section [How to use](https://gith
 This is the same model as [deep_localization_weighted_loss.py](sequence_of_digits_localization/deep_localization_weighted_loss.py). Only difference is the adaptation to 
 output special "no digit" character.
 
-#### Deeper localiyation model with weighted loss for vasibale length
+#### Deeper localization model with weighted loss for vasibale length
 [deep_localization_weighted_loss_variable_length_deeper.py](sequences_of_variable_length/deep_localization_weighted_loss_variable_length_deeper.py)
 
 This model is almost the same as [deep_localization_weighted_loss_variable_length.py](sequences_of_variable_length/deep_localization_weighted_loss_variable_length.py). Only difference is sixth convolutional layer.
+
+### SVHN recognition
+This task is to recognize house numbers in real word images taken from Google Street View. 
+
+<div align="center">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/2-8-8-10-10-10.png" width="700px">
+</div>
