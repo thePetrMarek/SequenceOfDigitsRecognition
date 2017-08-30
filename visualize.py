@@ -2,6 +2,7 @@ import os
 
 import matplotlib.pyplot as plt
 from matplotlib import patches
+import numpy as np
 
 
 class Visualize:
@@ -19,7 +20,7 @@ class Visualize:
         except:
             pass
         fig, ax = plt.subplots(1)
-        ax.imshow(image, cmap='gray')
+        ax.imshow(np.around(image))
 
         title = ""
         if correct_label is not None:
@@ -51,3 +52,18 @@ class Visualize:
 
         # TODO check if file already exists
         plt.savefig(os.path.join(folder, str(correct_label) + ".png"))
+
+    def visualize_inference(self, image, label, predicted_position):
+        fig, ax = plt.subplots(1)
+        ax.imshow(image, cmap='gray')
+        title = label
+        x = predicted_position[0]
+        y = predicted_position[1]
+        h = predicted_position[2]
+        w = predicted_position[3]
+        rect = patches.Rectangle((x - (w / 2), y - (h / 2)), w, h, linewidth=1, edgecolor='r', facecolor='none')
+        point = patches.Rectangle((x, y), 1, 1, linewidth=1, edgecolor='r', facecolor='none')
+        ax.add_patch(rect)
+        ax.add_patch(point)
+        plt.title(title)
+        plt.show()
