@@ -209,7 +209,7 @@ This model is inspired by paper Multi-digit Number Recognition from Street View 
 This model adds dropout before output layers of model [svhn_paper_convolution.py](SVHN_recognition/svhn_paper_convolution.py).
 
 <div align="center">
-  <img src="http://petr-marek.com/wp-content/uploads/2017/07/graph-runSVHN_paper_convolution_dropout_output_0.85C.png" width="600px">
+  <img src="http://petr-marek.com/wp-content/uploads/2017/07/graph-runSVHN_paper_convolution_dropout_output_0.85C.png" width="700px">
 </div>
 
 #### No maxpooling
