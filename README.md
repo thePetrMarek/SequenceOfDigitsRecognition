@@ -38,10 +38,18 @@ You will need to create dataset of sequences of digits. The dataset is created b
     
 Three pickle files (train_variable_localization.p, validation_variable_localization.p, test_variable_localization.p) will be created containing training, validation and testing datasets.
 
-The next step is to run main file for training of the sequence recognition models. Main file for it is [main_sequences_variable_length.py](sequences_of_variable_length/main_sequences_variable_length.py) in the [sequences_of_variable_length](sequences_of_variable_length) folder. Open the folder, choose the model in the main method and run the training by:
+The next step is to run main file for training of the sequence recognition models. Main file for it is [main_sequences_variable_length.py](sequences_of_variable_length/main_sequences_variable_length.py) in the [sequences_of_variable_length](sequences_of_variable_length) folder. Open the file, choose the model in the main method and run the training by:
 
     py -3 main_sequence_variable_length.py
 
+### SVHN recognition
+This task uses real images of house numbers from Street View. Download dataset from [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/) and place it into project's root. Run [prepare_svhn_dataset.py](prepare_svhn_dataset.py) by:
+    
+    py -3 prepare_svhn_dataset.py
+    
+This will create folder ``SVHN_data`` containing prepared dataset. Use file [SVHN_recognition/main_SVHN_recognition.py](SVHN_recognition/main_SVHN_recognition.py) for training in the [SVHN_recognition](SVHN_recognition) folder. Open the file, choose the model in the main method and run the training by:
+
+    py -3 main_SVHN_recognition.py
 
 ## Models
 ### Single digit recognition
